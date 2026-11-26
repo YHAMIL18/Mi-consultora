@@ -1,0 +1,7 @@
+{
+  "limpiezaAutomatica": true,
+  "diasRetencion": 30,
+  "estadosAprobados": ["Contratado"],
+  "estadosProtegidos": [],
+  "revisarCadaMinutos": 60
+}

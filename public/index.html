@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LA ORBIS GESTIÓN - Postulaciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="estilos.css" rel="stylesheet">
+</head>
+<body>
+
+  <header class="nav-crema">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="marca" href="index.html" aria-label="LA ORBIS GESTIÓN, inicio">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="6" fill="#c9693f"/><ellipse cx="20" cy="20" rx="17" ry="8" fill="none" stroke="#2b7a7b" stroke-width="3" transform="rotate(-30 20 20)"/><ellipse cx="20" cy="20" rx="17" ry="8" fill="none" stroke="#2b1230" stroke-width="3" transform="rotate(30 20 20)"/></svg>
+        <span>LA ORBIS<br>GESTIÓN</span>
+      </a>
+      <div class="dropdown">
+        <button class="btn-menu dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#postular">Postular</a></li>
+          <li><a class="dropdown-item" href="contacto.html">Contacto</a></li>
+          <li><a class="dropdown-item" href="admin.html"><i class="fa-solid fa-lock me-1"></i> Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-crema">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-5">
+          <h1>Conectamos talento con oportunidades</h1>
+          <p>Consultora de gestión y talento humano en La Paz, Bolivia.</p>
+          <a href="#postular" class="btn btn-terracota btn-lg">Postular ahora</a>
+        </div>
+        <div class="col-lg-7">
+          <img src="hero-talento.svg" alt="Personas de distintos perfiles conectadas por una red de talento">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion-vacantes" id="postular">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-5">
+          <div class="arco arco-0 text-center">
+            <div class="arco-avatar mx-auto"><i class="fa-solid fa-paper-plane"></i></div>
+            <h5>Postula con nosotros</h5>
+            <p>Completa tu postulación y nuestro equipo se pondrá en contacto contigo.</p>
+            <button type="button" class="btn btn-terracota" id="btnPostular">Postularme</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de postulación -->
+  <div class="modal fade" id="postularModal" tabindex="-1" aria-labelledby="tituloModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-postular">
+      <form id="formPostulacion" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloModal">Postular a LA ORBIS GESTIÓN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="formacion" id="fFormacion">
+
+          <div class="progreso" id="progreso">
+            <div class="progreso-barra" id="progresoBarra"><span id="progresoTxt">0 de 3 secciones listas</span></div>
+            <i class="fa-solid fa-check progreso-ok" id="progresoOk"></i>
+          </div>
+
+          <h6 class="sec">1. Datos Personales</h6>
+          <div class="campo-ico"><i class="fa-regular fa-user"></i>
+            <input name="nombre" class="form-control" placeholder="Nombre completo" aria-label="Nombre completo" required></div>
+          <div class="row g-2">
+            <div class="col-sm-6"><div class="campo-ico"><i class="fa-regular fa-id-card"></i>
+              <input name="carnet" class="form-control" placeholder="Carnet de identidad" aria-label="Carnet de identidad" required></div></div>
+            <div class="col-sm-6"><div class="campo-ico"><i class="fa-solid fa-phone"></i>
+              <input name="telefono" class="form-control" placeholder="Celular (WhatsApp)" aria-label="Celular (WhatsApp)" required></div></div>
+          </div>
+
+          <h6 class="sec">2. Formación y Experiencia</h6>
+          <div class="fila-form">
+            <span class="fila-label">Formación</span>
+            <div class="segmentado" id="segFormacion" role="group" aria-label="Formación"></div>
+          </div>
+          <div class="fila-form">
+            <span class="fila-label"><i class="fa-solid fa-briefcase me-2"></i>Años de experiencia</span>
+            <div class="stepper">
+              <button type="button" id="expMenos" aria-label="Restar un año"><i class="fa-solid fa-minus"></i></button>
+              <input type="number" min="0" max="50" name="experiencia" id="fExperiencia" value="0" aria-label="Años de experiencia" required>
+              <button type="button" id="expMas" aria-label="Sumar un año"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <h6 class="sec">3. Stack Tecnológico <small>(Opcional)</small></h6>
+          <div class="buscar-tech">
+            <input type="search" id="buscarTech" class="form-control" placeholder="Buscar tecnología..." aria-label="Buscar tecnología" autocomplete="off">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div id="preguntasEspecificas"></div>
+          <div id="sinResultados" class="text-muted small" style="display:none;">Ninguna tecnología coincide con tu búsqueda.
+            <button type="button" class="btn btn-link btn-sm p-0 align-baseline fw-semibold" id="btnAgregarBusqueda">Agregar «<span id="textoBusqueda"></span>»</button>
+          </div>
+
+          <div class="otra-tech">
+            <div class="grupo-titulo">¿No encuentras tu lenguaje o tecnología? Agrégala aquí</div>
+            <div class="otra-fila">
+              <input type="text" id="nuevaTech" class="form-control" maxlength="40" placeholder="Ej: Elixir, Power BI, Unity..." aria-label="Agregar otro lenguaje o tecnología" autocomplete="off">
+              <button type="button" class="btn-agregar" id="btnAgregarTech"><i class="fa-solid fa-plus me-1"></i>Agregar</button>
+            </div>
+            <div class="small mt-1" id="msgTech" role="status"></div>
+            <div class="chips mt-2" id="techsExtra"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div id="mensajeForm" class="me-auto small" role="status"></div>
+          <button type="button" class="btn btn-link text-decoration-none text-secondary fw-semibold" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn-enviar" id="btnEnviar">Enviar postulación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="pie">
+    &copy; 2026 LA ORBIS GESTIÓN · La Paz, Bolivia
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Catálogo de tecnologías (ya no hay convocatorias: se muestra un solo stack para todos)
+    // tipo: 'multi' = casillas (varias respuestas), 'select' = una opción, 'text' = texto libre
+    // opcional: true = puede quedar sin marcar (se guarda como "Ninguno")
+    // IMPORTANTE: las opciones no deben contener ";" (se usa como separador)
+    const CATALOGO = [
+      { categoria: 'Desarrollo', icono: 'fa-display', puesto: 'Desarrollador Frontend (Interfaces Web)',
+        descripcion: 'Construcción de interfaces web modernas y responsivas.',
+        preguntas: [
+          { label: 'Lenguajes base', tipo: 'multi', opciones: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript', 'Dart (web)'] },
+          { label: 'Frameworks y librerías', tipo: 'multi', opciones: ['React', 'Angular', 'Vue.js', 'Next.js', 'Nuxt.js', 'Svelte', 'Astro', 'SolidJS'] },
+          { label: 'Estilos y UI', tipo: 'multi', opciones: ['Tailwind CSS', 'Bootstrap', 'Material UI', 'Sass/SCSS', 'Styled Components'], opcional: true } ] },
+      { categoria: 'Desarrollo', icono: 'fa-server', puesto: 'Desarrollador Backend (Lógica y Servidores)',
+        descripcion: 'Desarrollo de lógica de negocio, servicios y APIs.',
+        preguntas: [
+          { label: 'Lenguajes y ecosistemas', tipo: 'multi', opciones: [
+            'Python (Django)', 'Python (FastAPI)', 'Python (Flask)',
+            'Node.js (Express)', 'Node.js (NestJS)', 'Node.js (Fastify)',
+            'Java (Spring Boot)', 'Java (Quarkus)', 'C# (.NET Core)',
+            'Go (Gin)', 'Go (Fiber)', 'PHP (Laravel)', 'PHP (Symfony)',
+            'Ruby on Rails', 'Rust (Actix)', 'Rust (Rocket)'] },
+          { label: 'Comunicación y APIs', tipo: 'multi', opciones: ['REST', 'GraphQL', 'gRPC', 'WebSockets (Socket.io)'] } ] },
+      { categoria: 'Desarrollo', icono: 'fa-mobile-screen', puesto: 'Desarrollador Móvil (Apps)',
+        descripcion: 'Aplicaciones móviles multiplataforma y nativas.',
+        preguntas: [
+          { label: 'Multiplataforma', tipo: 'multi', opciones: ['Dart (Flutter)', 'React Native', 'Ionic', 'C# (.NET MAUI)', 'Kotlin Multiplatform'], opcional: true },
+          { label: 'Nativo', tipo: 'multi', opciones: ['Kotlin (Android)', 'Java (Android)', 'Swift (iOS)', 'Objective-C (iOS)'], opcional: true } ] },
+      { categoria: 'Datos e IA', icono: 'fa-database', puesto: 'Especialista en Bases de Datos y Almacenamiento',
+        descripcion: 'Diseño, administración y optimización de bases de datos.',
+        preguntas: [
+          { label: 'Relacionales (SQL)', tipo: 'multi', opciones: ['PostgreSQL', 'MySQL', 'MariaDB', 'Microsoft SQL Server', 'Oracle Database', 'SQLite'], opcional: true },
+          { label: 'No relacionales (NoSQL)', tipo: 'multi', opciones: ['MongoDB', 'Redis', 'Cassandra', 'Firebase Firestore', 'DynamoDB', 'Elasticsearch'], opcional: true } ] },
+      { categoria: 'Datos e IA', icono: 'fa-brain', puesto: 'Ciencia de Datos, Big Data e IA',
+        descripcion: 'Analítica de datos, modelos de machine learning e IA generativa.',
+        preguntas: [
+          { label: 'Lenguajes', tipo: 'multi', opciones: ['Python', 'R', 'SQL', 'Julia', 'Scala'] },
+          { label: 'Librerías y frameworks', tipo: 'multi', opciones: ['Pandas', 'NumPy', 'Scikit-learn', 'TensorFlow', 'PyTorch', 'LangChain', 'Apache Spark'], opcional: true } ] },
+      { categoria: 'Infraestructura', icono: 'fa-cloud', puesto: 'DevOps, Cloud y Redes',
+        descripcion: 'Automatización, infraestructura como código y operación en la nube.',
+        preguntas: [
+          { label: 'Scripting y automatización', tipo: 'multi', opciones: ['Bash/Shell', 'Python', 'PowerShell', 'Go'] },
+          { label: 'Infraestructura como Código (IaC)', tipo: 'multi', opciones: ['Terraform', 'Ansible', 'CloudFormation', 'Pulumi'], opcional: true },
+          { label: 'Contenedores y Nube', tipo: 'multi', opciones: ['Docker', 'Kubernetes', 'AWS', 'Google Cloud Platform (GCP)', 'Microsoft Azure', 'DigitalOcean', 'Linux (Ubuntu)', 'Linux (Debian)', 'Linux (Red Hat)'] } ] },
+      { categoria: 'Calidad y Seguridad', icono: 'fa-bug', puesto: 'QA y Automatización de Pruebas',
+        descripcion: 'Aseguramiento de calidad, pruebas automatizadas y de rendimiento.',
+        preguntas: [
+          { label: 'Lenguajes para scripts de prueba', tipo: 'multi', opciones: ['JavaScript/TypeScript', 'Python', 'Java', 'C#', 'Ruby'] },
+          { label: 'Herramientas de automatización', tipo: 'multi', opciones: ['Cypress', 'Playwright', 'Selenium', 'Puppeteer', 'Appium', 'JMeter', 'k6', 'Postman'] } ] },
+      { categoria: 'Calidad y Seguridad', icono: 'fa-shield-halved', puesto: 'Ciberseguridad y Pentesting',
+        descripcion: 'Seguridad ofensiva y defensiva, análisis de vulnerabilidades.',
+        preguntas: [
+          { label: 'Lenguajes útiles', tipo: 'multi', opciones: ['Python', 'Bash', 'PowerShell', 'C/C++', 'SQL', 'JavaScript'] },
+          { label: 'Herramientas y entornos', tipo: 'multi', opciones: ['Kali Linux', 'OWASP ZAP', 'Burp Suite', 'Metasploit', 'Nmap', 'Wireshark', 'SonarQube'] } ] },
+      { categoria: 'Diseño', icono: 'fa-pen-ruler', puesto: 'Diseñador UX/UI y Prototipado',
+        descripcion: 'Diseño de interfaces, prototipos y experiencias de usuario.',
+        preguntas: [
+          { label: 'Conocimientos técnicos base', tipo: 'multi', opciones: ['HTML5', 'CSS3 básico', 'JSON (tokens de diseño)'], opcional: true },
+          { label: 'Herramientas', tipo: 'multi', opciones: ['Figma', 'Adobe XD', 'Sketch', 'Framer', 'Webflow', 'Zeplin', 'Illustrator'] } ] },
+      { categoria: 'Gestión', icono: 'fa-diagram-project', puesto: 'Gestión de Proyectos (PM / Product Owner / Scrum Master)',
+        descripcion: 'Liderazgo de equipos y gestión ágil de productos y proyectos.',
+        preguntas: [
+          { label: 'Conocimientos técnicos útiles', tipo: 'multi', opciones: ['SQL básico', 'Markdown', 'Gherkin (Given-When-Then)'], opcional: true },
+          { label: 'Herramientas', tipo: 'multi', opciones: ['Jira', 'Confluence', 'Trello', 'Asana', 'Notion', 'Linear', 'Azure DevOps', 'ClickUp'] } ] }
+    ];
+
+    // Un solo stack: se juntan los grupos del catálogo, sin repetir tecnologías
+    const STACK = (() => {
+      const vistos = new Set();
+      return CATALOGO.flatMap(v => v.preguntas.map(p => ({
+        ...p,
+        categoria: v.categoria,
+        corto: p.label,
+        label: `${v.categoria} · ${p.label}`,   // así se guarda en la base de datos
+        opciones: p.opciones.filter(o => !vistos.has(o) && vistos.add(o)).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }))
+      }))).filter(p => p.opciones.length);
+    })();
+
+    const modal = new bootstrap.Modal(document.getElementById('postularModal'));
+    document.getElementById('btnPostular').addEventListener('click', abrirPostulacion);
+
+    const FORMACIONES = ['Bachiller', 'Técnico Superior', 'Licenciatura', 'Maestría', 'Doctorado'];
+    const normTxt = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const $id = id => document.getElementById(id);
+    const form = $id('formPostulacion');
+
+    // Icono y color suave de cada tecnología (si no hay marca conocida, se usa un icono genérico)
+    const MARCAS = [
+      [/next|nuxt|solid/, 'fa-solid fa-code', '#e5e7eb', '#111827'],
+      [/html/, 'fa-brands fa-html5', '#fde4dc', '#e44d26'],
+      [/css|styled/, 'fa-brands fa-css3-alt', '#dcecfb', '#1572b6'],
+      [/typescript/, 'fa-solid fa-code', '#d9e8fb', '#3178c6'],
+      [/vue/, 'fa-brands fa-vuejs', '#dff5ea', '#41b883'],
+      [/node|express|nestjs|fastify/, 'fa-brands fa-node-js', '#e3f3dc', '#539e43'],
+      [/javascript|^js/, 'fa-brands fa-js', '#fdf6c8', '#c9a800'],
+      [/react|ionic/, 'fa-brands fa-react', '#d9f3f9', '#0aa8d6'],
+      [/angular/, 'fa-brands fa-angular', '#f1e1fb', '#dd0031'],
+      [/svelte|astro/, 'fa-solid fa-bolt', '#fde0d6', '#ff3e00'],
+      [/python|django|fastapi|flask/, 'fa-brands fa-python', '#dce8f7', '#3776ab'],
+      [/java\b|spring|quarkus/, 'fa-brands fa-java', '#fde8d2', '#e76f00'],
+      [/php/, 'fa-brands fa-php', '#e6e7f6', '#777bb4'],
+      [/laravel/, 'fa-brands fa-laravel', '#fde0de', '#ff2d20'],
+      [/symfony/, 'fa-brands fa-symfony', '#e5e7eb', '#111827'],
+      [/swift|objective/, 'fa-brands fa-swift', '#fde1da', '#f05138'],
+      [/android|kotlin/, 'fa-brands fa-android', '#e0f6e8', '#3ddc84'],
+      [/docker|kubernetes/, 'fa-brands fa-docker', '#dcecfb', '#2496ed'],
+      [/aws|dynamodb|cloudformation/, 'fa-brands fa-aws', '#fdeccd', '#ff9900'],
+      [/google|gcp|firebase/, 'fa-brands fa-google', '#e1ecfb', '#4285f4'],
+      [/azure|microsoft|\.net|c#/, 'fa-brands fa-microsoft', '#dcecfb', '#0078d4'],
+      [/ubuntu/, 'fa-brands fa-ubuntu', '#fde3d6', '#e95420'],
+      [/red hat/, 'fa-brands fa-redhat', '#fddede', '#ee0000'],
+      [/linux|kali/, 'fa-brands fa-linux', '#ececec', '#222'],
+      [/figma/, 'fa-brands fa-figma', '#fde0d8', '#f24e1e'],
+      [/sass/, 'fa-brands fa-sass', '#fbe0ee', '#cc6699'],
+      [/bootstrap/, 'fa-brands fa-bootstrap', '#e9e0f6', '#7952b3'],
+      [/jira|confluence|azure devops/, 'fa-brands fa-jira', '#dce9fd', '#2684ff'],
+      [/trello/, 'fa-brands fa-trello', '#dcecfb', '#0079bf'],
+      [/github/, 'fa-brands fa-github', '#ececec', '#222'],
+      [/^r$/, 'fa-brands fa-r-project', '#dce8f7', '#276dc3'],
+      [/sql|postgre|mysql|maria|oracle|sqlite|mongo|redis|cassandra|elastic|firestore/, 'fa-solid fa-database', '#d9f3f1', '#0f8f86'],
+      [/bash|shell|powershell|terminal/, 'fa-solid fa-terminal', '#e5e7eb', '#111827'],
+    ];
+    const SUAVES = ['#fde4dc', '#dcecfb', '#e4f6e8', '#f1e6fb', '#fdf1d3', '#d9f3f1', '#fde0ee'];
+    function marcaDe(nombre) {
+      const n = normTxt(nombre);
+      const m = MARCAS.find(([re]) => re.test(n));
+      if (m) return { icono: m[1], fondo: m[2], color: m[3] };
+      const h = [...n].reduce((x, c) => (x * 31 + c.charCodeAt(0)) >>> 0, 7);
+      return { icono: 'fa-solid fa-code', fondo: SUAVES[h % SUAVES.length], color: '#334155' };
+    }
+
+    // Barra de progreso: 3 secciones (datos, formación y experiencia, stack opcional)
+    function actualizarProgreso() {
+      const v = n => form.elements[n].value.trim();
+      const s1 = v('nombre') && v('carnet') && v('telefono');
+      const s2 = v('formacion') && v('experiencia') !== '';
+      const listas = (s1 ? 1 : 0) + (s2 ? 1 : 0) + 1; // la sección 3 es opcional: siempre cuenta como lista
+      const barra = $id('progresoBarra');
+      barra.style.width = (listas / 3 * 100) + '%';
+      barra.classList.toggle('completa', listas === 3);
+      $id('progresoTxt').textContent = `${listas} de 3 secciones listas`;
+      $id('progresoOk').style.display = listas === 3 ? 'block' : 'none';
+    }
+
+    // Formación como botones segmentados
+    $id('segFormacion').innerHTML = FORMACIONES.map(f => `<button type="button" data-valor="${f}" aria-pressed="false">${f}</button>`).join('');
+    function elegirFormacion(valor) {
+      $id('fFormacion').value = valor;
+      $id('segFormacion').querySelectorAll('button').forEach(b => {
+        const on = b.dataset.valor === valor;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      actualizarProgreso();
+    }
+    $id('segFormacion').addEventListener('click', e => {
+      const b = e.target.closest('button[data-valor]');
+      if (b) elegirFormacion(b.dataset.valor);
+    });
+
+    // Años de experiencia con − y +
+    function cambiarExp(delta) {
+      const c = $id('fExperiencia');
+      const n = Math.min(50, Math.max(0, (parseInt(c.value) || 0) + delta));
+      c.value = n;
+      actualizarProgreso();
+    }
+    $id('expMenos').addEventListener('click', () => cambiarExp(-1));
+    $id('expMas').addEventListener('click', () => cambiarExp(1));
+
+    // Buscador de tecnologías
+    function filtrarTechs() {
+      const q = normTxt($id('buscarTech').value.trim());
+      let visibles = 0;
+      document.querySelectorAll('#preguntasEspecificas .grupo-stack').forEach(g => {
+        let hay = 0;
+        g.querySelectorAll('.chip-tech').forEach(c => {
+          const ok = !q || normTxt(c.dataset.nombre).includes(q);
+          c.classList.toggle('oculto', !ok);
+          if (ok) hay++;
+        });
+        g.classList.toggle('oculto', hay === 0);
+        visibles += hay;
+      });
+      document.querySelectorAll('#preguntasEspecificas .cat-stack').forEach(c => {
+        c.classList.toggle('oculto', !c.querySelector('.grupo-stack:not(.oculto)'));
+      });
+      const bruto = $id('buscarTech').value.trim();
+      $id('textoBusqueda').textContent = bruto;
+      $id('btnAgregarBusqueda').style.display = (bruto && !visibles) ? '' : 'none';
+      $id('sinResultados').style.display = visibles ? 'none' : 'block';
+    }
+    $id('buscarTech').addEventListener('input', filtrarTechs);
+    $id('buscarTech').addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+
+    // Tecnologías que el postulante agrega a mano (si no están en la lista)
+    const EXTRAS = [];
+    const MAX_EXTRAS = 10;
+    const escH = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    // Se quitan ";" y "|" porque son los separadores con los que se guarda la respuesta
+    const limpiarTech = t => String(t).replace(/[;|]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+
+    function avisoTech(txt, tipo) {
+      const m = $id('msgTech');
+      m.className = 'small mt-1 ' + (tipo === 'ok' ? 'text-success' : 'text-danger');
+      m.textContent = txt;
+    }
+
+    function pintarExtras() {
+      $id('techsExtra').innerHTML = EXTRAS.map((t, i) => `
+        <span class="chip-extra"><i class="fa-solid fa-code"></i><span>${escH(t)}</span>
+          <button type="button" data-quitar="${i}" aria-label="Quitar ${escH(t)}"><i class="fa-solid fa-xmark"></i></button></span>`).join('');
+    }
+
+    function agregarTech(valor) {
+      const t = limpiarTech(valor);
+      if (t.length < 2) return avisoTech('Escribe el nombre del lenguaje o tecnología.', 'error');
+      if (/https?:\/\//i.test(t)) return avisoTech('Escribe solo el nombre, sin enlaces.', 'error');
+      if (normTxt(t) === 'ninguno') return avisoTech('Escribe una tecnología concreta.', 'error');
+
+      // Si ya está en la lista, se marca esa en vez de duplicarla
+      const existente = [...document.querySelectorAll('#preguntasEspecificas .chip-tech')].find(c => normTxt(c.dataset.nombre) === normTxt(t));
+      if (existente) {
+        existente.querySelector('input').checked = true;
+        $id('buscarTech').value = ''; filtrarTechs();
+        existente.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        $id('nuevaTech').value = '';
+        return avisoTech(`"${existente.dataset.nombre}" ya estaba en la lista; la marcamos por ti.`, 'ok');
+      }
+      if (EXTRAS.some(x => normTxt(x) === normTxt(t))) return avisoTech('Ya la agregaste.', 'error');
+      if (EXTRAS.length >= MAX_EXTRAS) return avisoTech(`Puedes agregar hasta ${MAX_EXTRAS} tecnologías.`, 'error');
+
+      EXTRAS.push(t);
+      pintarExtras();
+      $id('nuevaTech').value = '';
+      avisoTech(`Agregada: ${t}`, 'ok');
+    }
+
+    $id('btnAgregarTech').addEventListener('click', () => agregarTech($id('nuevaTech').value));
+    $id('nuevaTech').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); agregarTech(e.target.value); } });
+    $id('btnAgregarBusqueda').addEventListener('click', () => {
+      const q = $id('buscarTech').value;
+      $id('buscarTech').value = ''; filtrarTechs();
+      agregarTech(q);
+    });
+    $id('techsExtra').addEventListener('click', e => {
+      const b = e.target.closest('[data-quitar]');
+      if (!b) return;
+      EXTRAS.splice(parseInt(b.dataset.quitar), 1);
+      pintarExtras();
+      avisoTech('', 'ok');
+    });
+
+    form.addEventListener('input', actualizarProgreso);
+    form.addEventListener('reset', () => setTimeout(() => { elegirFormacion(''); $id('buscarTech').value = ''; EXTRAS.length = 0; $id('nuevaTech').value = ''; pintarExtras(); filtrarTechs(); actualizarProgreso(); }, 0));
+
+    function abrirPostulacion() {
+      $id('mensajeForm').textContent = '';
+      $id('buscarTech').value = '';
+      EXTRAS.length = 0; $id('nuevaTech').value = ''; avisoTech('', 'ok'); pintarExtras();
+
+      // El stack se muestra por área (Desarrollo, Datos e IA, ...) y cada grupo conserva su título
+      const grupos = STACK.map((p, j) => {
+        if (p.tipo === 'multi') {
+          return `
+        <div class="grupo-stack">
+          <div class="grupo-titulo">${p.corto}</div>
+          <div class="chips" data-pregunta="${j}" data-tipo="multi">
+            ${p.opciones.map((o, k) => {
+              const m = marcaDe(o);
+              return `<label class="chip-tech" data-nombre="${o}" style="--tint:${m.fondo}">
+                <input type="checkbox" id="q${j}_${k}" value="${o}">
+                <i class="${m.icono}" style="color:${m.color}"></i><span>${o}</span><i class="fa-solid fa-check ok"></i>
+              </label>`;
+            }).join('')}
+          </div>
+        </div>`;
+        }
+        return `
+        <div class="grupo-stack">
+          <div class="grupo-titulo">${p.corto}</div>
+          ${p.tipo === 'select'
+            ? `<select class="form-select" data-pregunta="${j}"><option value="">Selecciona...</option>${p.opciones.map(o => `<option>${o}</option>`).join('')}</select>`
+            : `<input class="form-control" data-pregunta="${j}">`}
+        </div>`;
+      });
+      let html = '', ultima = null;
+      STACK.forEach((p, j) => {
+        if (p.categoria !== ultima) {
+          if (ultima !== null) html += '</div>';
+          html += `<div class="cat-stack"><div class="cat-titulo">${p.categoria}</div>`;
+          ultima = p.categoria;
+        }
+        html += grupos[j];
+      });
+      $id('preguntasEspecificas').innerHTML = html + (ultima !== null ? '</div>' : '');
+      filtrarTechs();
+      actualizarProgreso();
+      modal.show();
+    }
+
+    document.getElementById('formPostulacion').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btnEnviar');
+      const msg = document.getElementById('mensajeForm');
+      const datos = Object.fromEntries(new FormData(e.target).entries());
+      if (!datos.formacion) {
+        msg.className = 'me-auto small text-danger fw-bold';
+        msg.textContent = 'Selecciona tu formación en la sección 2.';
+        return;
+      }
+
+      // Une las respuestas específicas en un solo texto: "Pregunta: respuesta | ..."
+      // (en las preguntas de casillas, las opciones marcadas se separan con "; ").
+      // Todo es opcional: las secciones sin respuesta simplemente no se guardan.
+      const respuestas = [];
+      for (let j = 0; j < STACK.length; j++) {
+        const p = STACK[j];
+        const campo = e.target.querySelector(`[data-pregunta="${j}"]`);
+        const valor = p.tipo === 'multi'
+          ? [...campo.querySelectorAll('input:checked')].map(c => c.value).join('; ')
+          : campo.value.trim();
+        if (valor) respuestas.push(`${p.label}: ${valor}`);
+      }
+      if (EXTRAS.length) respuestas.push(`Otras tecnologías: ${EXTRAS.join('; ')}`);
+      datos.detalle_especifico = respuestas.join(' | ');
+
+      btn.disabled = true;
+      msg.className = 'me-auto small text-muted';
+      msg.textContent = 'Enviando...';
+      try {
+        const res = await fetch('/api/postular', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error();
+        msg.className = 'me-auto small text-success fw-bold';
+        msg.textContent = '¡Postulación enviada! Gracias.';
+        e.target.reset();
+        setTimeout(() => modal.hide(), 1500);
+      } catch (err) {
+        msg.className = 'me-auto small text-danger';
+        msg.textContent = 'No se pudo enviar. Intenta de nuevo.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
